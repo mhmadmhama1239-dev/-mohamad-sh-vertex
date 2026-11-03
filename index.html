@@ -1,247 +1,617 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamad SH Vertex Studio | Digital Solutions Agency</title>
+    <title>Mohamad SH Vertex Studio | استوديو الحلول الرقمية والتطوير</title>
+    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Tajawal Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#090A0F',
+                            dark: '#12141C',
+                            card: '#1A1D28',
+                            border: '#2A2E3D',
+                            hover: '#363B4E',
+                            accent: '#6366F1',
+                            accentH: '#4F46E5',
+                            text: '#F3F4F6',
+                            muted: '#9CA3AF'
+                        }
+                    },
+                    fontFamily: {
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #090A0F;
+            color: #F3F4F6;
+        }
+        /* Eye-Comfort Dark Contrast Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090A0F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2E3D;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #363B4E;
+        }
+        /* Glow Hover Effect */
+        .glow-card {
+            transition: all 0.3s ease;
+            border: 1px solid #2A2E3D;
+        }
+        .glow-card:hover {
+            border-color: #6366F1;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+        /* Pulse Effect */
+        .pulse-live {
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
     </style>
 </head>
-<body class="bg-black text-slate-100 antialiased selection:bg-slate-700 selection:text-white">
+<body class="antialiased selection:bg-brand-accent selection:text-white relative min-h-screen flex flex-col justify-between">
 
-    <!-- Navbar -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-black/80 border-b border-slate-900">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-800 to-slate-900 border border-slate-700 flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                    V
-                </div>
-                <span class="text-xl font-extrabold tracking-wide text-white">Mohamad SH <span class="text-slate-400">Vertex Studio</span></span>
-            </div>
-            <div class="flex items-center gap-3">
-                <a href="https://t.me/Galmood12" target="_blank" class="hidden sm:inline-block px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium text-sm transition border border-slate-800">
-                    Telegram
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 z-50 transition-all duration-150" style="width: 0%"></div>
+
+    <!-- Announcement Bar -->
+    <div class="bg-brand-card border-b border-brand-border py-2 text-center text-xs md:text-sm text-brand-muted">
+        <span class="inline-flex items-center gap-2">
+            <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full text-[10px] font-bold">تحديث</span>
+            <span>استشارات تقنية أولية مفرغة لمشاريع الأتمتة والمواقع لهذا الشهر</span>
+        </span>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-brand-black/90 backdrop-blur-md border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo & Studio Status -->
+            <div class="flex items-center gap-4">
+                <a href="#" class="flex items-center gap-2 text-xl font-black tracking-tight text-white">
+                    <span class="text-brand-accent">&lt;/&gt;</span>
+                    <span>Mohamad SH <span class="text-brand-accent">Vertex Studio</span></span>
                 </a>
-                <a href="https://tally.so/r/e5MBKk" target="_blank" class="px-5 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-white font-medium text-sm transition border border-slate-700 shadow-lg">
-                    Request Service
+                <!-- Live Studio Status Badge -->
+                <div class="hidden md:flex items-center gap-2 bg-brand-dark border border-brand-border px-3 py-1 rounded-full text-xs text-brand-muted">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-live"></span>
+                    <span id="liveStatusText">متاح لاستقبال مشاريع جديدة • متاح للتواصل الآن</span>
+                </div>
+            </div>
+
+            <!-- Navbar Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <!-- Language Switcher Button -->
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="flex items-center gap-2 bg-brand-card hover:bg-brand-hover border border-brand-border px-3 py-1.5 rounded-lg text-sm text-brand-text transition-all">
+                    <i class="fa-solid fa-globe text-brand-accent"></i>
+                    <span id="langText" class="font-bold">EN</span>
+                </button>
+
+                <!-- Action CTA Button -->
+                <a href="https://tally.so" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 bg-brand-accent hover:bg-brand-accentH text-white px-4 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-brand-accent/20">
+                    <span id="navCtaText">ابدأ مشروعك</span>
+                    <i class="fa-solid fa-arrow-left text-xs dir-icon"></i>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative py-24 px-6 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-transparent pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-slate-900 text-slate-300 text-sm font-semibold border border-slate-800 mb-6 shadow-sm">
-                ✨ Digital Solutions & Creative Studio
-            </span>
-            <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6" dir="ltr">
-                Crafting Your Digital Vision & <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-slate-400 to-slate-500">Innovative Solutions</span> for Business Excellence
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+            
+            <!-- Mobile Live Status Badge -->
+            <div class="md:hidden inline-flex items-center gap-2 bg-brand-dark border border-brand-border px-3 py-1 rounded-full text-xs text-brand-muted mb-6">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-live"></span>
+                <span>متاح لاستقبال مشاريع جديدة</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+                نحـول أفكارك إلى <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-300">منظومات رقمية موثوقة</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-400 leading-relaxed mb-10 max-w-2xl mx-auto">
-                نقدم منظومة من الخدمات الرقمية المبتكرة لتطوير حضورك الرقمي، تحسين كفاءة عملياتك، ومساعدتك على التوسع والتفوق في مجالك.
+            
+            <p class="text-base sm:text-xl text-brand-muted max-w-3xl mx-auto mb-10 leading-relaxed" id="heroDesc">
+                استوديو متخصص في تطوير البرمجيات والمواقع الاحترافية، أتمتة استقبال الطلبات، وصياغة المحتوى الرقمي الموجه للشركات والأعمال الحرة محلياً ودولياً.
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://tally.so/r/e5MBKk" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-lg shadow-xl border border-slate-700 transition">
-                    ابدأ مشروعك الآن (تعبئة الطلب)
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-14">
+                <a href="https://tally.so" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentH text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-indigo-500/20 flex items-center justify-center gap-3 transition-all text-lg">
+                    <span id="heroPrimaryCta">طلب خدمة جديدة</span>
+                    <i class="fa-solid fa-paper-plane dir-icon"></i>
                 </a>
-                <a href="#showcase" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold text-lg border border-slate-800 transition">
-                    استكشف أعمالنا
+                <a href="#solutions" class="w-full sm:w-auto bg-brand-card hover:bg-brand-hover border border-brand-border text-brand-text font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-3 transition-all text-lg">
+                    <span id="heroSecondaryCta">استكشف الحلول</span>
+                    <i class="fa-solid fa-layer-group"></i>
                 </a>
             </div>
-        </div>
-    </section>
 
-    <!-- Quality Guarantee Section -->
-    <section class="py-10 px-6 bg-slate-950 border-y border-slate-900">
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="inline-flex items-center gap-3 bg-black/60 border border-slate-800 px-6 py-4 rounded-2xl shadow-lg">
-                <span class="text-2xl">🛡️</span>
-                <p class="text-slate-200 font-bold text-base md:text-lg">
-                    ضمان الجودة: <span class="text-slate-400 font-normal">نلتزم بالتعديلات حتى الوصول إلى النتيجة التي ترضيك 100% قبل التسليم النهائي.</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Metrics & Features Section -->
-    <section class="py-16 px-6 bg-black border-b border-slate-900">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Metric 1 -->
-                <div class="p-6 bg-slate-950 border border-slate-900 rounded-2xl flex flex-col items-center text-center">
-                    <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-2xl mb-4 text-slate-300">
-                        ⚡
+            <!-- Trust Badges Bar -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <!-- Quality Guarantee -->
+                <div class="bg-brand-card/60 border border-brand-border p-4 rounded-xl flex items-center gap-3 text-right">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">سرعة تحميل عالية</h3>
-                    <p class="text-slate-400 text-sm">(أقل من 2 ثانية)</p>
+                    <div>
+                        <h4 class="font-bold text-white text-sm" id="badge1Title">🛡️ ضمان الجودة والتعديلات</h4>
+                        <p class="text-xs text-brand-muted" id="badge1Desc">نلتزم بالتعديلات حتى الوصول إلى النتيجة التي ترضيك 100% قبل التسليم النهائي.</p>
+                    </div>
                 </div>
 
-                <!-- Metric 2 -->
-                <div class="p-6 bg-slate-950 border border-slate-900 rounded-2xl flex flex-col items-center text-center">
-                    <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-2xl mb-4 text-slate-300">
-                        📱
+                <!-- Secure Payments & Invoicing -->
+                <div class="bg-brand-card/60 border border-brand-border p-4 rounded-xl flex items-center gap-3 text-right">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-file-invoice-dollar text-xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">توافق كامل</h3>
-                    <p class="text-slate-400 text-sm">متوافق 100% مع كافة الشاشات والهواتف</p>
-                </div>
-
-                <!-- Metric 3 -->
-                <div class="p-6 bg-slate-950 border border-slate-900 rounded-2xl flex flex-col items-center text-center">
-                    <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-2xl mb-4 text-slate-300">
-                        💬
+                    <div>
+                        <h4 class="font-bold text-white text-sm" id="badge2Title">💳 دفع آمن وفواتير رسمية</h4>
+                        <p class="text-xs text-brand-muted" id="badge2Desc">ندعم الفواتير الرقمية المعتمدة والمعاملات الآمنة للعملاء حول العالم.</p>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">استجابة سريعة</h3>
-                    <p class="text-slate-400 text-sm">دعم فني وتواصل مباشر خلال أقل من ساعة</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Showcase Section (Display Only) -->
-    <section id="showcase" class="py-20 px-6 bg-slate-950 border-b border-slate-900">
-        <div class="max-w-7xl mx-auto">
+        <!-- Technical Performance Metrics Bar -->
+        <section class="border-y border-brand-border bg-brand-dark/50 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                    <div class="p-4">
+                        <div class="text-2xl font-black text-brand-accent mb-1">⚡ أقل من ثانيتين</div>
+                        <div class="text-sm text-brand-muted" id="metric1">سرعة تحميل عالية وأداء سلس للغاية</div>
+                    </div>
+                    <div class="p-4 border-t sm:border-t-0 sm:border-r border-brand-border">
+                        <div class="text-2xl font-black text-brand-accent mb-1">📱 100% متجاوب</div>
+                        <div class="text-sm text-brand-muted" id="metric2">توافق كامل ومختبر على كافة الأجهزة والشاشات</div>
+                    </div>
+                    <div class="p-4 border-t sm:border-t-0 sm:border-r border-brand-border">
+                        <div class="text-2xl font-black text-brand-accent mb-1">💬 أقل من ساعة</div>
+                        <div class="text-sm text-brand-muted" id="metric3">سرعة استجابة وتواصل دعم فني مباشر</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Showcase Section -->
+        <section id="solutions" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">نماذج من أعمالنا الاستعراضية</h2>
-                <p class="text-slate-400 text-lg">معرض تفاعلي يعكس جودة التصميم والحلول التي نقدمها لعملائنا</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Showcase Item 1 -->
-                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center text-2xl mb-6 border border-slate-700">
-                        ✨
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">مراكز التجميل والعناية</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        نموذج استعراضي لتنظيم عرض الخدمات، الباقات، وصور الأعمال السابقة بأسلوب بصري جذاب ومريح.
-                    </p>
+                <div class="inline-flex items-center gap-2 bg-brand-card border border-brand-border px-3 py-1 rounded-full text-xs text-brand-accent font-bold mb-3">
+                    <i class="fa-solid fa-desktop"></i>
+                    <span id="responsiveBadge">شاشة كمبيوتر • هاتف • تابلت</span>
                 </div>
-
-                <!-- Showcase Item 2 -->
-                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center text-2xl mb-6 border border-slate-700">
-                        ☕
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">المطاعم والكافيهات</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        واجهة استعراضية تفاعلية لعرض قوائم الطعام، المنتجات الخاصة، وتسهيل التواصل المباشر مع الزبائن.
-                    </p>
-                </div>
-
-                <!-- Showcase Item 3 -->
-                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center text-2xl mb-6 border border-slate-700">
-                        🏢
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">الشركات والخدمات المهنية</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        تصاميم تعريفية متكاملة تُبرز هوية المؤسسة، الخدمات المقدمة، ومقومات التميز ببصمة احترافية.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 px-6 bg-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">خدماتنا المبتكرة</h2>
-                <p class="text-slate-400 text-lg">باقة متكاملة من الحلول المصممة لتسريع نموك الرقمي</p>
+                <h2 class="text-3xl font-black text-white" id="solutionsTitle">أنماط الحلول الرقمية</h2>
+                <p class="text-brand-muted mt-2 max-w-xl mx-auto" id="solutionsSub">نماذج وأنظمة مبنية خصيصاً لتناسب مختلف قطاعات الأعمال</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="bg-slate-950 border border-slate-900 rounded-2xl p-8 hover:border-slate-700 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-center text-2xl mb-6">
-                        💻
+                <!-- Solution 1 -->
+                <div class="glow-card bg-brand-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3" id="sol1Title">تطوير وتصميم مواقع الويب</h3>
+                        <p class="text-brand-muted text-sm leading-relaxed mb-6" id="sol1Desc">
+                            واجهات عصرية وسريعة جداً تبرز هوية مشروعك، مع تهيئة كاملة لمحركات البحث وسهولة في التصفح على الجوال.
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">التجارب والواجهات الرقمية</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm">
-                        تصميم وتطوير واجهات استعراضية متجاوبة وسريعة تبرز هوية أعمالك وتوفر تجربة استخدام استثنائية.
-                    </p>
+                    <a href="https://tally.so" target="_blank" class="w-full bg-brand-dark hover:bg-brand-hover text-brand-text border border-brand-border py-3 rounded-lg text-sm font-bold text-center block transition-all">
+                        <span class="reqBtnText">طلب هذا الحل</span>
+                    </a>
                 </div>
 
-                <!-- Service 2 -->
-                <div class="bg-slate-950 border border-slate-900 rounded-2xl p-8 hover:border-slate-700 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-center text-2xl mb-6">
-                        📝
+                <!-- Solution 2 -->
+                <div class="glow-card bg-brand-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-[#fa-mobile-screen-button] fa-mobile-screen-button"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3" id="sol2Title">حلول وتطبيقات الهواتف الذكية</h3>
+                        <p class="text-brand-muted text-sm leading-relaxed mb-6" id="sol2Desc">
+                            تطبيقات وتجارب استخدام تفاعلية ومصممة بدقة لتلبي احتياجات عملاء الأجهزة المحمولة بمرونة فائقة.
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">صياغة المحتوى والتعريب</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm">
-                        صياغة نصوص تسويقية ثنائية اللغة (عربي/إنكليزي) تعبر عن رؤيتك وتوصل رسالتك بدقة واحترافية.
-                    </p>
+                    <a href="https://tally.so" target="_blank" class="w-full bg-brand-dark hover:bg-brand-hover text-brand-text border border-brand-border py-3 rounded-lg text-sm font-bold text-center block transition-all">
+                        <span class="reqBtnText">طلب هذا الحل</span>
+                    </a>
                 </div>
 
-                <!-- Service 3 -->
-                <div class="bg-slate-950 border border-slate-900 rounded-2xl p-8 hover:border-slate-700 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-center text-2xl mb-6">
-                        ⚡
+                <!-- Solution 3 -->
+                <div class="glow-card bg-brand-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3" id="sol3Title">أنظمة الأتمتة واستقبال الطلبات</h3>
+                        <p class="text-brand-muted text-sm leading-relaxed mb-6" id="sol3Desc">
+                            ربط استمارات ذكية ونظم أتمتة لتدفق العمل بدقة وسرعة، لتحويل الزوار إلى عملاء وإرسال التنبيهات الفورية تلقائياً.
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">الأتمتة والحلول الذكية</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm">
-                        بناء نماذج استقبال الطلبات وتنظيم سير العمل الرقمي لرفع الإنتاجية وتقليل الجهد اليدوي.
-                    </p>
+                    <a href="https://tally.so" target="_blank" class="w-full bg-brand-dark hover:bg-brand-hover text-brand-text border border-brand-border py-3 rounded-lg text-sm font-bold text-center block transition-all">
+                        <span class="reqBtnText">طلب هذا الحل</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Why Choose Us -->
-    <section class="py-20 px-6 bg-slate-950 border-t border-slate-900">
-        <div class="max-w-5xl mx-auto">
+        <!-- Core Agency Services -->
+        <section class="py-16 bg-brand-dark/40 border-y border-brand-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl sm:text-3xl font-black text-white" id="servicesTitle">خدمات الاستوديو الأساسية</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-brand-card p-6 rounded-xl border border-brand-border">
+                        <i class="fa-solid fa-code text-brand-accent text-xl mb-4"></i>
+                        <h4 class="font-bold text-white mb-2" id="serv1Title">تطوير منصات الويب والتطبيقات</h4>
+                        <p class="text-xs text-brand-muted leading-relaxed" id="serv1Desc">كتابة وتطوير كود نقي ومستقر لصفحات الهبوط والتطبيقات دون تعقيدات وبأعلى كفاءة.</p>
+                    </div>
+                    <div class="bg-brand-card p-6 rounded-xl border border-brand-border">
+                        <i class="fa-solid fa-language text-brand-accent text-xl mb-4"></i>
+                        <h4 class="font-bold text-white mb-2" id="serv2Title">صياغة المحتوى وتعريب النصوص</h4>
+                        <p class="text-xs text-brand-muted leading-relaxed" id="serv2Desc">ترجمة وتوطين المحتوى بين العربية والإنكليزية بأسلوب محترف ومناسب لثقافة العميل.</p>
+                    </div>
+                    <div class="bg-brand-card p-6 rounded-xl border border-brand-border">
+                        <i class="fa-solid fa-diagram-project text-brand-accent text-xl mb-4"></i>
+                        <h4 class="font-bold text-white mb-2" id="serv3Title">أتمتة سير العمل الرقمي</h4>
+                        <p class="text-xs text-brand-muted leading-relaxed" id="serv3Desc">ربط النماذج الذكية بأدوات التنبيه التلقائية لتوفير الوقت وتسهيل إدارة الطلبات.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section (3-Step Model) -->
+        <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-white mb-4">لماذا Mohamad SH Vertex Studio؟</h2>
+                <h2 class="text-3xl font-black text-white" id="workflowTitle">كيف نعمل معاً؟</h2>
+                <p class="text-brand-muted mt-2" id="workflowSub">3 خطوات بسيطة ومحددة للانتقال بفكرتك إلى الواقع</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="p-6 bg-black/40 rounded-2xl border border-slate-900">
-                    <div class="text-4xl mb-4">⚡</div>
-                    <h4 class="text-lg font-bold text-white mb-2">سرعة وكفاءة عالية</h4>
-                    <p class="text-slate-400 text-sm">نعتمد أفضل الممارسات التقنية لضمان أداء سلس وفائق السرعة.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="bg-brand-card border border-brand-border p-6 rounded-2xl relative">
+                    <div class="w-10 h-10 bg-brand-accent text-white font-black rounded-lg flex items-center justify-center mb-4 text-lg">1</div>
+                    <h3 class="text-lg font-bold text-white mb-2" id="step1Title">تقديم الطلب والمواصفات</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed" id="step1Desc">تعبئة استمارة الطلب الذكية وتحديد متطلبات المشروع والميزانية المناسبة.</p>
                 </div>
-                <div class="p-6 bg-black/40 rounded-2xl border border-slate-900">
-                    <div class="text-4xl mb-4">🎯</div>
-                    <h4 class="text-lg font-bold text-white mb-2">حلول مخصصة للنمو</h4>
-                    <p class="text-slate-400 text-sm">نبني كل منصة أو خدمة بما يتماشى مباشرة مع أهداف أعمالك.</p>
+                <!-- Step 2 -->
+                <div class="bg-brand-card border border-brand-border p-6 rounded-2xl relative">
+                    <div class="w-10 h-10 bg-brand-accent text-white font-black rounded-lg flex items-center justify-center mb-4 text-lg">2</div>
+                    <h3 class="text-lg font-bold text-white mb-2" id="step2Title">التصميم والمراجعة</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed" id="step2Desc">بناء مسودة العمل التفاعلية وإجراء كافة التعديلات المطلوبة حتى الرضا التام.</p>
                 </div>
-                <div class="p-6 bg-black/40 rounded-2xl border border-slate-900">
-                    <div class="text-4xl mb-4">🌐</div>
-                    <h4 class="text-lg font-bold text-white mb-2">رؤية مستقبلية مرنة</h4>
-                    <p class="text-slate-400 text-sm">نصمم لك أنظمة قابلة للتوسع والتطوير المستمر مع نمو مشروعك.</p>
+                <!-- Step 3 -->
+                <div class="bg-brand-card border border-brand-border p-6 rounded-2xl relative">
+                    <div class="w-10 h-10 bg-emerald-500 text-white font-black rounded-lg flex items-center justify-center mb-4 text-lg">3</div>
+                    <h3 class="text-lg font-bold text-white mb-2" id="step3Title">التسليم والانطلاق</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed" id="step3Desc">تسليم كافة الملفات النهائية وتفعيل الأنظمة مع الفواتير الرقمية الرسمية.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 bg-brand-dark/40 border-t border-brand-border">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl sm:text-3xl font-black text-white" id="faqTitle">الأسئلة الشائعة</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-brand-card border border-brand-border p-5 rounded-xl">
+                        <h4 class="font-bold text-white text-sm mb-2" id="q1">س: كم تستغرق مدة تنفيذ المشروع؟</h4>
+                        <p class="text-xs text-brand-muted leading-relaxed" id="a1">تعتمد المدة على نوع وحجم المشروع، ولكن معظم الصفحات والأنظمة يتم تسليمها خلال أيام قليلة مع الالتزام التام بالمواعيد.</p>
+                    </div>
+                    <div class="bg-brand-card border border-brand-border p-5 rounded-xl">
+                        <h4 class="font-bold text-white text-sm mb-2" id="q2">س: هل يمكنني طلب تعديلات على العمل بعد التسليم المبدئي؟</h4>
+                        <p class="text-xs text-brand-muted leading-relaxed" id="a2">نعم بالتأكيد، نحن نلتزم بتقديم كافة التعديلات اللازمة حتى نصل إلى النتيجة التي ترضيك 100%.</p>
+                    </div>
+                    <div class="bg-brand-card border border-brand-border p-5 rounded-xl">
+                        <h4 class="font-bold text-white text-sm mb-2" id="q3">س: كيف يتم التعامل المالي والدفع؟</h4>
+                        <p class="text-xs text-brand-muted leading-relaxed" id="a3">ندعم وسائل الفواتير الرقمية المعاملات الآمنة والحديثة لضمان سهولة التحويل وحفظ حقوق الطرفين من أي مكان.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer & Trust Footnote -->
+    <footer class="bg-brand-black border-t border-brand-border pt-12 pb-24 md:pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+                <div class="text-center md:text-right">
+                    <div class="text-lg font-black text-white mb-1">Mohamad SH Vertex Studio</div>
+                    <p class="text-xs text-brand-muted" id="footerSub">استوديو الحلول الرقمية، تصميم المواقع، والأتمتة الذكية.</p>
+                </div>
+
+                <!-- Quick Copy Telegram & Actions -->
+                <div class="flex items-center gap-3">
+                    <button onclick="copyTelegram()" class="bg-brand-card hover:bg-brand-hover border border-brand-border px-4 py-2 rounded-lg text-xs font-bold text-brand-text flex items-center gap-2 transition-all">
+                        <i class="fa-regular fa-copy text-brand-accent"></i>
+                        <span id="copyTgBtn">نسخ معرف التلغرام</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Trust Footnote Badge -->
+            <div class="border-t border-brand-border/60 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-brand-muted gap-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-emerald-400"></i>
+                    <span id="securityBadge">معاملات وفواتير مشفرة وآمنة 100%</span>
+                </div>
+                <div>
+                    &copy; 2026 Mohamad SH Vertex Studio. جميع الحقوق محفوظة.
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 px-6 text-center bg-black">
-        <div class="max-w-3xl mx-auto bg-slate-900/60 border border-slate-800 p-12 rounded-3xl shadow-2xl">
-            <h2 class="text-3xl font-extrabold text-white mb-4">جاهز لتحويل أفكارك إلى واقع رقمي؟</h2>
-            <p class="text-slate-300 mb-8 text-lg">اختر الطريقة الأنسب للتواصل معنا أو ابدأ بطلب مشروعك فوراً.</p>
-            
-            <div class="flex flex-wrap items-center justify-center gap-4">
-                <a href="https://tally.so/r/e5MBKk" target="_blank" class="px-8 py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-base shadow-lg border border-slate-700 transition">
-                    📝 تعبئة استمارة الطلب
-                </a>
-                <a href="https://wa.me/963983334528" target="_blank" class="px-8 py-4 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-200 font-bold text-base border border-slate-800 transition">
-                    💬 واتساب مباشر (0983334528)
-                </a>
-                <a href="https://t.me/Galmood12" target="_blank" class="px-8 py-4 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold text-base border border-slate-800 transition">
-                    ✈️ تلغرام (@Galmood12)
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 px-6 border-t border-slate-900 text-center text-slate-500 text-sm bg-black">
-        <p>© 2026 Mohamad SH Vertex Studio. جميع الحقوق محفوظة.</p>
     </footer>
 
+    <!-- Floating Action Contact Boxes (Separate Boxes, No Numbers Displayed) -->
+    <div class="fixed bottom-6 left-6 z-50 flex flex-col gap-3">
+        <!-- Floating WhatsApp Box -->
+        <a href="https://wa.me/96181283986" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 transition-all hover:scale-105 border border-emerald-400/30">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span class="font-bold text-sm">واتساب</span>
+        </a>
+
+        <!-- Floating Telegram Box -->
+        <a href="https://t.me/Galmood12" target="_blank" rel="noopener noreferrer" aria-label="Telegram Contact" class="bg-sky-600 hover:bg-sky-500 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 transition-all hover:scale-105 border border-sky-400/30">
+            <i class="fa-brands fa-telegram text-xl"></i>
+            <span class="font-bold text-sm">تلغرام</span>
+        </a>
+    </div>
+
+    <!-- Floating Back to Top Button -->
+    <button id="backToTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-50 w-11 h-11 bg-brand-card hover:bg-brand-hover border border-brand-border text-brand-text rounded-xl shadow-xl hidden items-center justify-center transition-all hover:scale-105">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-brand-accent text-white px-4 py-2 rounded-lg text-xs font-bold shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none">
+        تم النسخ بنجاح!
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        let currentLang = 'ar';
+
+        const translations = {
+            ar: {
+                liveStatus: 'متاح لاستقبال مشاريع جديدة • متاح للتواصل الآن',
+                navCta: 'ابدأ مشروعك',
+                heroDesc: 'استوديو متخصص في تطوير البرمجيات والمواقع الاحترافية، أتمتة استقبال الطلبات، وصياغة المحتوى الرقمي الموجه للشركات والأعمال الحرة محلياً ودولياً.',
+                heroPrimaryCta: 'طلب خدمة جديدة',
+                heroSecondaryCta: 'استكشف الحلول',
+                badge1Title: '🛡️ ضمان الجودة والتعديلات',
+                badge1Desc: 'نلتزم بالتعديلات حتى الوصول إلى النتيجة التي ترضيك 100% قبل التسليم النهائي.',
+                badge2Title: '💳 دفع آمن وفواتير رسمية',
+                badge2Desc: 'ندعم الفواتير الرقمية المعتمدة والمعاملات الآمنة للعملاء حول العالم.',
+                metric1: 'سرعة تحميل عالية وأداء سلس للغاية',
+                metric2: 'توافق كامل ومختبر على كافة الأجهزة والشاشات',
+                metric3: 'سرعة استجابة وتواصل دعم فني مباشر',
+                responsiveBadge: 'شاشة كمبيوتر • هاتف • تابلت',
+                solutionsTitle: 'أنماط الحلول الرقمية',
+                solutionsSub: 'نماذج وأنظمة مبنية خصيصاً لتناسب مختلف قطاعات الأعمال',
+                sol1Title: 'تطوير وتصميم مواقع الويب',
+                sol1Desc: 'واجهات عصرية وسريعة جداً تبرز هوية مشروعك، مع تهيئة كاملة لمحركات البحث وسهولة في التصفح على الجوال.',
+                sol2Title: 'حلول وتطبيقات الهواتف الذكية',
+                sol2Desc: 'تطبيقات وتجارب استخدام تفاعلية ومصممة بدقة لتلبي احتياجات عملاء الأجهزة المحمولة بمرونة فائقة.',
+                sol3Title: 'أنظمة الأتمتة واستقبال الطلبات',
+                sol3Desc: 'ربط استمارات ذكية ونظم أتمتة لتدفق العمل بدقة وسرعة، لتحويل الزوار إلى عملاء وإرسال التنبيهات الفورية تلقائياً.',
+                reqBtnText: 'طلب هذا الحل',
+                servicesTitle: 'خدمات الاستوديو الأساسية',
+                serv1Title: 'تطوير منصات الويب والتطبيقات',
+                serv1Desc: 'كتابة وتطوير كود نقي ومستقر لصفحات الهبوط والتطبيقات دون تعقيدات وبأعلى كفاءة.',
+                serv2Title: 'صياغة المحتوى وتعريب النصوص',
+                serv2Desc: 'ترجمة وتوطين المحتوى بين العربية والإنكليزية بأسلوب محترف ومناسب لثقافة العميل.',
+                serv3Title: 'أتمتة سير العمل الرقمي',
+                serv3Desc: 'ربط النماذج الذكية بأدوات التنبيه التلقائية لتوفير الوقت وتسهيل إدارة الطلبات.',
+                workflowTitle: 'كيف نعمل معاً؟',
+                workflowSub: '3 خطوات بسيطة ومحددة للانتقال بفكرتك إلى الواقع',
+                step1Title: 'تقديم الطلب والمواصفات',
+                step1Desc: 'تعبئة استمارة الطلب الذكية وتحديد متطلبات المشروع والميزانية المناسبة.',
+                step2Title: 'التصميم والمراجعة',
+                step2Desc: 'بناء مسودة العمل التفاعلية وإجراء كافة التعديلات المطلوبة حتى الرضا التام.',
+                step3Title: 'التسليم والانطلاق',
+                step3Desc: 'تسليم كافة الملفات النهائية وتفعيل الأنظمة مع الفواتير الرقمية الرسمية.',
+                faqTitle: 'الأسئلة الشائعة',
+                q1: 'س: كم تستغرق مدة تنفيذ المشروع؟',
+                a1: 'تعتمد المدة على نوع وحجم المشروع، ولكن معظم الصفحات والأنظمة يتم تسليمها خلال أيام قليلة مع الالتزام التام بالمواعيد.',
+                q2: 'س: هل يمكنني طلب تعديلات على العمل بعد التسليم المبدئي؟',
+                a2: 'نعم بالتأكيد، نحن نلتزم بتقديم كافة التعديلات اللازمة حتى نصل إلى النتيجة التي ترضيك 100%.',
+                q3: 'س: كيف يتم التعامل المالي والدفع؟',
+                a3: 'ندعم وسائل الفواتير الرقمية والمعاملات الآمنة والحديثة لضمان سهولة التحويل وحفظ حقوق الطرفين من أي مكان.',
+                footerSub: 'استوديو الحلول الرقمية، تصميم المواقع، والأتمتة الذكية.',
+                copyTgBtn: 'نسخ معرف التلغرام',
+                securityBadge: 'معاملات وفواتير مشفرة وآمنة 100%'
+            },
+            en: {
+                liveStatus: 'Available for new projects • Online Now',
+                navCta: 'Start Project',
+                heroDesc: 'Specialized studio for web & app development, automated workflow intake, and professional bilingual content localization.',
+                heroPrimaryCta: 'Request a Service',
+                heroSecondaryCta: 'Explore Solutions',
+                badge1Title: '🛡️ Revision & Quality Guarantee',
+                badge1Desc: '100% satisfaction committed with flexible revisions prior to final delivery.',
+                badge2Title: '💳 Secure Invoicing & Payments',
+                badge2Desc: 'Verified digital invoicing and secure global transaction support.',
+                metric1: 'Under 2 seconds loading speed',
+                metric2: '100% Fully Responsive Design',
+                metric3: 'Direct response within 1 hour',
+                responsiveBadge: 'Desktop • Mobile • Tablet',
+                solutionsTitle: 'Digital Solution Models',
+                solutionsSub: 'Tailored digital frameworks built to elevate modern business sectors.',
+                sol1Title: 'Web Design & Development',
+                sol1Desc: 'Modern, high-speed interfaces built to showcase your business identity with full SEO optimization.',
+                sol2Title: 'Mobile Digital Solutions',
+                sol2Desc: 'Interactive smartphone experiences crafted for high flexibility and seamless user interaction.',
+                sol3Title: 'Automated Lead Intake Systems',
+                sol3Desc: 'Smart form integrations and workflow automations to handle client inquiries automatically.',
+                reqBtnText: 'Request Solution',
+                servicesTitle: 'Core Studio Services',
+                serv1Title: 'Web & App Platform Development',
+                serv1Desc: 'Clean, robust code generation for landing pages and web apps focused on efficiency.',
+                serv2Title: 'Content Writing & Localization',
+                serv2Desc: 'Professional English-Arabic translation and content adaptation tailored for your audience.',
+                serv3Title: 'Workflow Automation',
+                serv3Desc: 'Connecting smart intake forms with instant automated alert bots to save time.',
+                workflowTitle: 'How We Work',
+                workflowSub: '3 simple steps to transform your vision into reality',
+                step1Title: 'Submit Project Brief',
+                step1Desc: 'Fill out the smart intake form specifying your business goals and requirements.',
+                step2Title: 'Design & Revision',
+                step2Desc: 'Interactive prototype creation followed by iterative tweaks until full satisfaction.',
+                step3Title: 'Final Delivery & Launch',
+                step3Desc: 'Handoff of final assets and deployment alongside verified digital invoicing.',
+                faqTitle: 'Frequently Asked Questions',
+                q1: 'Q: How long does project execution take?',
+                a1: 'Timeline depends on scale, but most digital solutions are delivered within a few days.',
+                q2: 'Q: Can I request modifications after initial delivery?',
+                a2: 'Absolutely. We commit to flexible revisions until you are 100% satisfied with the outcome.',
+                q3: 'Q: How are financial transactions handled?',
+                a3: 'We support verified digital invoicing and secure channels for safe international transactions.',
+                footerSub: 'Digital Solutions, Web Development & Smart Automation Studio.',
+                copyTgBtn: 'Copy Telegram Handle',
+                securityBadge: '100% Encrypted & Safe Transactions'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.getElementById('langText').innerText = currentLang === 'ar' ? 'EN' : 'العربية';
+            
+            // Toggle Direction Icons
+            document.querySelectorAll('.dir-icon').forEach(icon => {
+                if (currentLang === 'en') {
+                    icon.classList.remove('fa-arrow-left', 'fa-paper-plane');
+                    icon.classList.add('fa-arrow-right', 'fa-paper-plane');
+                } else {
+                    icon.classList.remove('fa-arrow-right');
+                    icon.classList.add('fa-arrow-left');
+                }
+            });
+
+            // Update All Content Texts
+            const t = translations[currentLang];
+            document.getElementById('liveStatusText').innerText = t.liveStatus;
+            document.getElementById('navCtaText').innerText = t.navCta;
+            document.getElementById('heroDesc').innerText = t.heroDesc;
+            document.getElementById('heroPrimaryCta').innerText = t.heroPrimaryCta;
+            document.getElementById('heroSecondaryCta').innerText = t.heroSecondaryCta;
+            document.getElementById('badge1Title').innerText = t.badge1Title;
+            document.getElementById('badge1Desc').innerText = t.badge1Desc;
+            document.getElementById('badge2Title').innerText = t.badge2Title;
+            document.getElementById('badge2Desc').innerText = t.badge2Desc;
+            document.getElementById('metric1').innerText = t.metric1;
+            document.getElementById('metric2').innerText = t.metric2;
+            document.getElementById('metric3').innerText = t.metric3;
+            document.getElementById('responsiveBadge').innerText = t.responsiveBadge;
+            document.getElementById('solutionsTitle').innerText = t.solutionsTitle;
+            document.getElementById('solutionsSub').innerText = t.solutionsSub;
+            document.getElementById('sol1Title').innerText = t.sol1Title;
+            document.getElementById('sol1Desc').innerText = t.sol1Desc;
+            document.getElementById('sol2Title').innerText = t.sol2Title;
+            document.getElementById('sol2Desc').innerText = t.sol2Desc;
+            document.getElementById('sol3Title').innerText = t.sol3Title;
+            document.getElementById('sol3Desc').innerText = t.sol3Desc;
+            document.querySelectorAll('.reqBtnText').forEach(el => el.innerText = t.reqBtnText);
+            document.getElementById('servicesTitle').innerText = t.servicesTitle;
+            document.getElementById('serv1Title').innerText = t.serv1Title;
+            document.getElementById('serv1Desc').innerText = t.serv1Desc;
+            document.getElementById('serv2Title').innerText = t.serv2Title;
+            document.getElementById('serv2Desc').innerText = t.serv2Desc;
+            document.getElementById('serv3Title').innerText = t.serv3Title;
+            document.getElementById('serv3Desc').innerText = t.serv3Desc;
+            document.getElementById('workflowTitle').innerText = t.workflowTitle;
+            document.getElementById('workflowSub').innerText = t.workflowSub;
+            document.getElementById('step1Title').innerText = t.step1Title;
+            document.getElementById('step1Desc').innerText = t.step1Desc;
+            document.getElementById('step2Title').innerText = t.step2Title;
+            document.getElementById('step2Desc').innerText = t.step2Desc;
+            document.getElementById('step3Title').innerText = t.step3Title;
+            document.getElementById('step3Desc').innerText = t.step3Desc;
+            document.getElementById('faqTitle').innerText = t.faqTitle;
+            document.getElementById('q1').innerText = t.q1;
+            document.getElementById('a1').innerText = t.a1;
+            document.getElementById('q2').innerText = t.q2;
+            document.getElementById('a2').innerText = t.a2;
+            document.getElementById('q3').innerText = t.q3;
+            document.getElementById('a3').innerText = t.a3;
+            document.getElementById('footerSub').innerText = t.footerSub;
+            document.getElementById('copyTgBtn').innerText = t.copyTgBtn;
+            document.getElementById('securityBadge').innerText = t.securityBadge;
+        }
+
+        // Scroll Progress Bar & Back to Top Logic
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
+
+            let backBtn = document.getElementById("backToTopBtn");
+            if (winScroll > 300) {
+                backBtn.classList.remove("hidden");
+                backBtn.classList.add("flex");
+            } else {
+                backBtn.classList.remove("flex");
+                backBtn.classList.add("hidden");
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function copyTelegram() {
+            navigator.clipboard.writeText("@Galmood12");
+            let toast = document.getElementById("toast");
+            toast.innerText = currentLang === 'ar' ? 'تم نسخ معرف التلغرام بنجاح!' : 'Telegram handle copied!';
+            toast.classList.remove("opacity-0");
+            setTimeout(() => {
+                toast.classList.add("opacity-0");
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
